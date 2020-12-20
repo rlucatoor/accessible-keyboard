@@ -2,9 +2,17 @@
 
 body {
     background-color: #f4f4f4;
+    /* Make page unselectable */
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
-/* Text output area */
+/* Upper area with text output and play triangle */
+
+.upper-row {
+    display: flex;
+}
 
 .text-box {
     border-radius: 10px;
@@ -16,6 +24,36 @@ body {
     font-size: 1.3rem;
 }
 
+.play-triangle {
+    width: 0;
+    height: 0;
+    border-top: 30px solid transparent;
+    border-bottom: 30px solid transparent;
+    border-left: 40px solid #00ba94;
+    position: absolute;
+    top: 15%;
+    right: 11%;
+}
+
+.play-triangle:hover {
+    border-left: 40px solid rgba(0, 186, 148, 0.8);
+    cursor: pointer
+}
+
+.stop-square {
+    height: 40px;
+    width: 40px;
+    background-color: #d9534f;
+    position: absolute;
+    top: 16%;
+    right: 5%;
+}
+
+.stop-square:hover {
+    background-color: rgb(217, 83, 79, 0.8);
+    cursor: pointer;
+}
+
 /* Keyboard area */
 
 .keyboard-container {
@@ -25,7 +63,7 @@ body {
 .keyboard-line {
     display: flex;
     justify-content: center;
-    margin-bottom: 3%;
+    margin-bottom: 2%;
 }
 
 .key {

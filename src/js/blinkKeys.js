@@ -1,10 +1,13 @@
 // Define keys
 const allKeys = ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'eAcc', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'oAcc',
-'aAcc', 'z', 'x', 'c', 'v', 'b', 'n', 'm', 'iAcc', 'uAcc', 'dot', 'colon', 'questionMark', 'exclamationPoint',
-'openParenthesis', 'closeParenthesis'];
+'aAcc', 'z', 'x', 'c', 'v', 'b', 'n', 'm', 'iAcc', 'uAcc', 'dot', 'comma', 'colon', 'questionMark', 'exclamationPoint',
+'openParenthesis', 'closeParenthesis', 'zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'whitespace'];
 
 // Keep track of index of current key
 var count = 0;
+// String to be output to screen
+var text = '';
+var isIterating = false;
 
 // Turn key background yellow, then back to white, and increment count
 function blinkKey(keyId, blinkMilliseconds) {
@@ -25,11 +28,26 @@ function blinkKeyAndPass(id, blinkMillisecond, nextBlinkMillisecond) {
 }
 
 // Iterate over all keys, making them blink one at a time
-for (var i=0; i<allKeys.length; i++) {
-    blinkKeyAndPass(i, 2000, 2000);
+function iterate() {
+    if (!isIterating) {
+        isIterating = true;
+        for (var i=0; i<allKeys.length; i++) {
+            blinkKeyAndPass(i, 100, 100);
+        }
+    }
+}
+
+// Stop iterations
+function stop() {
+    isIterating = false;
 }
 
 // If click is detected, output index of current key
 document.addEventListener('click', (event) => {
-    console.log(count);
+    const letter = document.getElementById(allKeys[count-1]).innerHTML;
+    text += letter;
+    document.getElementById('text-box').value = text;
 })
+
+document.getElementById('play-triangle').onclick = iterate;
+document.getElementById('stop-square').onclick = stop;
