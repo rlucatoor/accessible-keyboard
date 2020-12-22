@@ -12,6 +12,8 @@ var text = '';
 var isIterating = false;
 // Keeps track of number of iterations performed
 var iterationsCount = 0;
+// Keep track of all timeouts
+var timeouts = [];
 
 // Turn key background yellow, then back to white
 function blinkKey(keyId, blinkMilliseconds) {
@@ -43,9 +45,9 @@ function blinkKeyProcedure(keyId, blinkMilliseconds) {
 // Make a key blink, then pass to next
 function blinkKeyAndPass(id, blinkMillisecond) {
     // Next key should blink after previous one is done blinking
-    setTimeout(function() {
+    timeouts.push(setTimeout(function() {
         blinkKeyProcedure(id, blinkMillisecond);
-    }, blinkMillisecond * id);
+    }, blinkMillisecond * id));
 }
 
 // Iterate over all keys, making them blink one at a time
@@ -61,6 +63,14 @@ function iterate() {
 
 // Stop iterations
 function stop() {
+    // Stop all timeouts
+    for (var i = 0; i < timeouts.length; i++) {
+        clearTimeout(timeouts[i]);
+    }
+    // Reset count
+    count = 0;
+    // Reset iterations count
+    iterationsCount = 0;
     isIterating = false;
 }
 
@@ -85,6 +95,7 @@ document.addEventListener('click', (event) => {
     document.getElementById('text-box').value = text;
 })
 
-// Start iterations
+// Start iterating
 document.getElementById('play-triangle').onclick = iterate;
+// Stop iterating
 document.getElementById('stop-square').onclick = stop;
