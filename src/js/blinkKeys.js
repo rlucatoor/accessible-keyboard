@@ -71,7 +71,19 @@ function stop() {
     count = 0;
     // Reset iterations count
     iterationsCount = 0;
+    // Remove isIterating flag
     isIterating = false;
+}
+
+// Reset textbox
+function reset() {
+    // If an iteration is underway, do nothing
+    if (!isIterating) {
+        // Reset text
+        text = '';
+        // Update text
+        document.getElementById('text-box').value = text;
+    }
 }
 
 // If click is detected, add selected letter to text string
@@ -95,6 +107,8 @@ document.addEventListener('click', (event) => {
     document.getElementById('text-box').value = text;
 })
 
+// Reset textbox
+document.getElementById('reset-button').onclick = reset;
 // Start iterating
 document.getElementById('play-triangle').onclick = iterate;
 // Stop iterating

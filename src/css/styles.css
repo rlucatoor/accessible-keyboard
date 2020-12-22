@@ -14,6 +14,30 @@ body {
     display: flex;
 }
 
+.reset-button {
+    position: absolute;
+    top: 16%;
+    left: 6%;
+    background-color: #d9534f;
+    color: #fff;
+    font-family: 'Helvetica', 'Arial', sans-serif;
+    font-size: 2em;
+    font-weight: bold;
+    text-align: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+}
+
+.reset-button:hover {
+    background-color: rgb(217, 83, 79, 0.8);
+    cursor: pointer;
+}
+
+.reset-x {
+    vertical-align: middle;
+}
+
 .text-box {
     border-radius: 10px;
     display: block;
