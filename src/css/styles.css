@@ -107,3 +107,12 @@ body {
 .large-key {
     width: 120px;
 }
+
+/* SMALLER SCREENS */
+@media (max-width:1200px) {
+
+    .hide-small-screen {
+        display: none;
+    }
+    
+}
