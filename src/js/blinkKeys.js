@@ -1,11 +1,9 @@
 // Define keys
 var allKeys = ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'eAcc', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'oAcc',
-'aAcc', 'z', 'x', 'c', 'v', 'b', 'n', 'm', 'iAcc', 'uAcc', 'dot', 'comma', 'colon', 'questionMark', 'exclamationPoint',
-'openParenthesis', 'closeParenthesis', 'zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine',
-'whitespace', 'backspace'];
+'aAcc', 'z', 'x', 'c', 'v', 'b', 'n', 'm', 'iAcc', 'uAcc', 'dot', 'comma', 'apostrophe', 'colon', 'questionMark',
+'exclamationPoint', 'openParenthesis', 'closeParenthesis', 'zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven',
+'eight', 'nine', 'whitespace', 'backspace'];
 
-// Keep track of index of current key
-var count = 0;
 // String to be output to screen
 var text = '';
 // Evaluates whether an iteration is underway
@@ -14,14 +12,11 @@ var isIterating = false;
 var iterationsCount = 0;
 // Keep track of all timeouts
 var timeouts = [];
+// Keeps track of current index
+var currentIndex;
 
 // Turn key background yellow, then back to white
 function blinkKey(keyId, blinkMilliseconds) {
-    // Check whether count is past first iteration, if it is convert it to the
-    // equivalent number on the first iteration
-    if (keyId >= allKeys.length) {
-        keyId -= (allKeys.length*iterationsCount + 1);
-    }
     // Turn backgroun yellow
     document.getElementById(allKeys[keyId]).style.backgroundColor = 'yellow';
     // Turn it back to white after a given number of milliseconds
@@ -32,14 +27,17 @@ function blinkKey(keyId, blinkMilliseconds) {
     );
 }
 
-// After blinking key, increment count. If one full iteration has been performed,
-// increment iteration count
-function blinkKeyProcedure(keyId, blinkMilliseconds) {
-    blinkKey(keyId, blinkMilliseconds);
-    if (Number.isInteger(count/allKeys.length) && count !== 0) {
+function blinkKeyProcedure(keyId, blinkMillisecond) {
+    // If index is past first iteration, convert it to the equivalent
+    // index on the first iteration
+    keyId -= (allKeys.length*iterationsCount);
+    // Save value of current index
+    currentIndex = keyId;
+    // If a full iteration has been performed, increment iterations count
+    if (Number.isInteger(keyId/(allKeys.length - 1)) && (keyId/(allKeys.length - 1) !== 0)) {
         iterationsCount++;
     }
-    count++;
+    blinkKey(keyId, blinkMillisecond)
 }
 
 // Make a key blink, then pass to next
@@ -63,12 +61,13 @@ function iterate() {
 
 // Stop iterations
 function stop() {
+    // Prevent current letter from being displayed by throwing
+    // an error instead
+    currentIndex = false;
     // Stop all timeouts
     for (var i = 0; i < timeouts.length; i++) {
         clearTimeout(timeouts[i]);
     }
-    // Reset count
-    count = 0;
     // Reset iterations count
     iterationsCount = 0;
     // Remove isIterating flag
@@ -79,6 +78,9 @@ function stop() {
 function reset() {
     // If an iteration is underway, do nothing
     if (!isIterating) {
+        // Prevent current letter from being displayed by throwing
+        // an error instead
+        currentIndex = false;
         // Reset text
         text = '';
         // Update text
@@ -88,16 +90,9 @@ function reset() {
 
 // If click is detected, add selected letter to text string
 document.addEventListener('click', (event) => {
-    // If count is past first iteration, convert it to the equivalent
-    // index on the first iteration
-    var index = count - (allKeys.length*iterationsCount) -2;
-    // Balance off bias introduced after first iteration
-    if (iterationsCount === 0) {
-        index += 1;
-    }
     // Extract letter from array of keys
-    const letter = document.getElementById(allKeys[index]).innerHTML;
-    if (letter == 'canc' && text.length > 0) {
+    const letter = document.getElementById(allKeys[currentIndex]).innerHTML;
+    if (letter === 'canc' && text.length > 0) {
         // Canc was selected, delete last letter
         text = text.substring(0, text.length - 1);
     } else {
