@@ -11,7 +11,12 @@ let mainWindow;
 
 const createWindow = () => {
     // Create the browser window.
-    mainWindow = new BrowserWindow();
+    mainWindow = new BrowserWindow({ show: false });
+    // Don't show window until it's fully loaded
+    mainWindow.once('ready-to-show', () => {
+        mainWindow.show()
+    })
+    // Maximize window
     mainWindow.maximize()
 
     // and load the index.html of the app.
