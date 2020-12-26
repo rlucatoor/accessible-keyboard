@@ -4,6 +4,10 @@ var allKeys = ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'eAcc', 'a', 's
 'exclamationPoint', 'openParenthesis', 'closeParenthesis', 'zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven',
 'eight', 'nine', 'whitespace', 'backspace'];
 
+// Defines possible iteration speed. Value refers to n times 1 second
+const iterationSpeed = [2, 1.5, 1, 0.7];
+// Refers to the index in the iterationSpeed array
+var speedIndex = 0;
 // String to be output to screen
 var text = '';
 // Evaluates whether an iteration is underway
@@ -14,6 +18,9 @@ var iterationsCount = 0;
 var timeouts = [];
 // Keeps track of current index
 var currentIndex;
+
+// Set iteration speed showed in the program
+document.getElementById('speed-indicator').innerHTML = speedIndex + 1;
 
 // Turn key background yellow, then back to white
 function blinkKey(keyId, blinkMilliseconds) {
@@ -27,7 +34,7 @@ function blinkKey(keyId, blinkMilliseconds) {
     );
 }
 
-function blinkKeyProcedure(keyId, blinkMillisecond) {
+function blinkKeyProcedure(keyId, blinkMilliseconds) {
     // If index is past first iteration, convert it to the equivalent
     // index on the first iteration
     keyId -= (allKeys.length*iterationsCount);
@@ -37,24 +44,29 @@ function blinkKeyProcedure(keyId, blinkMillisecond) {
     if (Number.isInteger(keyId/(allKeys.length - 1)) && (keyId/(allKeys.length - 1) !== 0)) {
         iterationsCount++;
     }
-    blinkKey(keyId, blinkMillisecond)
+    blinkKey(keyId, blinkMilliseconds)
 }
 
 // Make a key blink, then pass to next
-function blinkKeyAndPass(id, blinkMillisecond) {
+function blinkKeyAndPass(id, blinkMilliseconds) {
     // Next key should blink after previous one is done blinking
     timeouts.push(setTimeout(function() {
-        blinkKeyProcedure(id, blinkMillisecond);
-    }, blinkMillisecond * id));
+        blinkKeyProcedure(id, blinkMilliseconds);
+    }, blinkMilliseconds * id));
 }
 
 // Iterate over all keys, making them blink one at a time
 function iterate() {
+    // Prevent current letter from being displayed by throwing
+    // an error instead
+    currentIndex = false;
     // Do nothing if an iteration is already underway
     if (!isIterating) {
         isIterating = true;
         for (var i=0; i<10000; i++) {
-            blinkKeyAndPass(i, 1000);
+            // Iteration speed is set at the beginning of each iteration
+            // and depends on the speedIndex variable
+            blinkKeyAndPass(i, 1000*iterationSpeed[speedIndex]);
         }
     }
 }
@@ -76,6 +88,9 @@ function stop() {
 
 // Reset textbox
 function reset() {
+    // Prevent current letter from being displayed by throwing
+    // an error instead
+    currentIndex = false;
     // If an iteration is underway, do nothing
     if (!isIterating) {
         // Prevent current letter from being displayed by throwing
@@ -85,6 +100,40 @@ function reset() {
         text = '';
         // Update text
         document.getElementById('text-box').value = text;
+    }
+}
+
+// Decrease iteration speed
+function decreaseIterationSpeed() {
+    // Prevent current letter from being displayed by throwing
+    // an error instead
+    currentIndex = false;
+    // Iteration speed can only be modified when no iteration
+    // is underway
+    if (!isIterating) {
+        if (speedIndex > 0) {
+            // Decrese spead index
+            speedIndex--;
+            // Update iteration speed showed in the program
+            document.getElementById('speed-indicator').innerHTML = speedIndex + 1;
+        }
+    }
+}
+
+// Increase iteration speed
+function increaseIterationSpeed() {
+    // Prevent current letter from being displayed by throwing
+    // an error instead
+    currentIndex = false;
+    // Iteration speed can only be modified when no iteration
+    // is underway
+    if (!isIterating) {
+        if (speedIndex < iterationSpeed.length - 1) {
+            // Increase speed index
+            speedIndex++;
+            // Update iteration speed showed in the program
+            document.getElementById('speed-indicator').innerHTML = speedIndex + 1;
+        }
     }
 }
 
@@ -104,6 +153,10 @@ document.addEventListener('click', (event) => {
 
 // Reset textbox
 document.getElementById('reset-button').onclick = reset;
+// Decrease iteration speed
+document.getElementById('speed-minus').onclick = decreaseIterationSpeed;
+// Increase iteration speed
+document.getElementById('speed-plus').onclick = increaseIterationSpeed;
 // Start iterating
 document.getElementById('play-triangle').onclick = iterate;
 // Stop iterating

@@ -6,9 +6,10 @@ body {
     -webkit-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    font-family: 'Helvetica', 'Arial', sans-serif;
 }
 
-/* Upper area with text output and play triangle */
+/* Upper area with text output and action buttons */
 
 .upper-row {
     display: flex;
@@ -16,7 +17,7 @@ body {
 
 .reset-button {
     position: absolute;
-    top: 16%;
+    top: 8%;
     left: 6%;
     background-color: #d9534f;
     color: #fff;
@@ -38,12 +39,43 @@ body {
     vertical-align: middle;
 }
 
+.speed-minus,
+.speed-plus {
+    color: #00ba94;
+    font-family: 'Helvetica', 'Arial', sans-serif;
+    font-size: 4em;
+    font-weight: bold;
+    position: absolute;
+    top: 18%;
+    left: 2.5%;
+}
+
+.speed-plus {
+    left: 11%;
+    top: 18.5%;
+}
+
+.speed-minus:hover,
+.speed-plus:hover {
+    color: rgba(0, 186, 148, 0.8);
+    cursor: pointer
+}
+
+.speed-indicator {
+    color: #000;
+    font-family: 'Helvetica', 'Arial', sans-serif;
+    font-size: 2em;
+    position: absolute;
+    top: 21%;
+    left: 7%;
+}
+
 .text-box {
     border-radius: 10px;
     display: block;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 2%;
+    margin-top: 1%;
     resize: none;
     font-size: 1.3rem;
 }
@@ -55,7 +87,7 @@ body {
     border-bottom: 30px solid transparent;
     border-left: 40px solid #00ba94;
     position: absolute;
-    top: 15%;
+    top: 13%;
     right: 11%;
 }
 
@@ -69,7 +101,7 @@ body {
     width: 40px;
     background-color: #d9534f;
     position: absolute;
-    top: 16%;
+    top: 14%;
     right: 5%;
 }
 
@@ -81,7 +113,7 @@ body {
 /* Keyboard area */
 
 .keyboard-container {
-    margin-top: 5%;
+    margin-top: 4%;
 }
 
 .keyboard-line {
@@ -108,11 +140,30 @@ body {
     width: 120px;
 }
 
+/* Footer */
+
+.footer {
+    text-align: center;
+    font-size: 0.8em;
+    margin-top: 3%;
+    color: #b4b4b4;
+}
+
+.footer-link {
+    color: inherit;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.footer-link:hover {
+    text-decoration: underline;
+}
+
 /* SMALLER SCREENS */
 @media (max-width:1200px) {
 
     .hide-small-screen {
         display: none;
     }
-    
+
 }
