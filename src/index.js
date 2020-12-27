@@ -1,5 +1,44 @@
-import { app, BrowserWindow, ipcMain } from 'electron';
-import { autoUpdater } = from 'electron-updater';
+import { app, BrowserWindow, autoUpdater, dialog } from 'electron';
+
+// Check if environment is development or production
+const isDev = require('electron-is-dev');
+
+// Automatically check for updates
+require('update-electron-app')()
+
+// Define update server and link it to autoUpdater
+const server = 'https://github.com/rlucato/accessible-keyboard'
+const url = `${server}/update/${process.platform}/${app.getVersion()}`
+autoUpdater.setFeedURL({ url })
+
+// If app is not in the development environment, check for updates every
+// ten minutes
+if (!isDev) {
+    setInterval(() => {
+        autoUpdater.checkForUpdates()
+    }, 600000)
+}
+
+// Create notification window when an update is available
+autoUpdater.on('update-downloaded', (event, releaseNotes, releaseName) => {
+    const dialogOpts = {
+        type: 'info',
+        buttons: ['Restart', 'Later'],
+        title: 'Application Update',
+        message: process.platform === 'win32' ? releaseNotes : releaseName,
+        detail: 'A new version has been downloaded. Restart the application to apply the updates.'
+    }
+
+    dialog.showMessageBox(dialogOpts).then((returnValue) => {
+        if (returnValue.response === 0) autoUpdater.quitAndInstall()
+    })
+})
+
+// Handle update errors
+autoUpdater.on('error', message => {
+    console.error('There was a problem updating the application')
+    console.error(message)
+})
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) { // eslint-disable-line global-require
@@ -30,11 +69,6 @@ const createWindow = () => {
         // when you should delete the corresponding element.
         mainWindow = null;
     });
-
-    // Check if any update is available
-    mainWindow.once('ready-to-show', () => {
-        autoUpdater.checkForUpdatesAndNotify();
-    });
 };
 
 // This method will be called when Electron has finished
@@ -59,16 +93,5 @@ app.on('activate', () => {
     }
 });
 
-// Handle update events
-autoUpdater.on('update-available', () => {
-    mainWindow.webContents.send('update_available');
-});
-
-autoUpdater.on('update-downloaded', () => {
-    mainWindow.webContents.send('update_downloaded');
-});
-
-// Install update
-ipcMain.on('restart_app', () => {
-    autoUpdater.quitAndInstall();
-});
+// In this file you can include the rest of your app's specific main process
+// code. You can also put them in separate files and import them here.
