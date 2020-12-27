@@ -1,23 +1,4 @@
-import { app, BrowserWindow, autoUpdater, dialog } from 'electron';
-
-// Check if environment is development or production
-const isDev = require('electron-is-dev');
-
-// Automatically check for updates
-require('update-electron-app')()
-
-// Define update server and link it to autoUpdater
-const server = 'https://github.com/rlucato/accessible-keyboard'
-const url = `${server}/update/${process.platform}/${app.getVersion()}`
-autoUpdater.setFeedURL({ url })
-
-// If app is not in the development environment, check for updates every
-// ten minutes
-if (!isDev) {
-    setInterval(() => {
-        autoUpdater.checkForUpdates()
-    }, 600000)
-}
+import { app, BrowserWindow } from 'electron';
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) { // eslint-disable-line global-require
