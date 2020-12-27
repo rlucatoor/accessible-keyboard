@@ -4,6 +4,10 @@
   "version": "1.0.0",
   "description": "Accessible keyboard is a keyboard which makes it easy for physically impaired persons to type.",
   "main": "src/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rlucato/accessible-keyboard.git"
+  },
   "scripts": {
     "start": "electron-forge start",
     "package": "electron-forge package",
@@ -49,8 +53,10 @@
   },
   "dependencies": {
     "electron-compile": "^6.4.4",
+    "electron-is-dev": "^1.2.0",
     "electron-squirrel-startup": "^1.0.0",
-    "jquery": "^3.5.1"
+    "jquery": "^3.5.1",
+    "update-electron-app": "^2.0.1"
   },
   "devDependencies": {
     "@electron-forge/cli": "^6.0.0-beta.54",
