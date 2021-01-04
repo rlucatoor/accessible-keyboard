@@ -18,7 +18,7 @@ body {
 .reset-button {
     position: absolute;
     top: 8%;
-    left: 6%;
+    left: 5.5%;
     background-color: #d9534f;
     color: #fff;
     font-family: 'Helvetica', 'Arial', sans-serif;
@@ -47,11 +47,11 @@ body {
     font-weight: bold;
     position: absolute;
     top: 18%;
-    left: 2.5%;
+    left: 3%;
 }
 
 .speed-plus {
-    left: 11%;
+    left: 8.5%;
     top: 18.5%;
 }
 
@@ -67,7 +67,7 @@ body {
     font-size: 2em;
     position: absolute;
     top: 21%;
-    left: 7%;
+    left: 6%;
 }
 
 .text-box {
@@ -77,7 +77,8 @@ body {
     margin-right: auto;
     margin-top: 1%;
     resize: none;
-    font-size: 1.3rem;
+    font-size: 2.5rem;
+    font-family: 'Helvetica', 'Arial', sans-serif;
 }
 
 .play-triangle {
@@ -87,8 +88,8 @@ body {
     border-bottom: 30px solid transparent;
     border-left: 40px solid #00ba94;
     position: absolute;
-    top: 13%;
-    right: 11%;
+    top: 8%;
+    right: 6%;
 }
 
 .play-triangle:hover {
@@ -101,8 +102,8 @@ body {
     width: 40px;
     background-color: #d9534f;
     position: absolute;
-    top: 14%;
-    right: 5%;
+    top: 22%;
+    right: 6%;
 }
 
 .stop-square:hover {
@@ -113,50 +114,32 @@ body {
 /* Keyboard area */
 
 .keyboard-container {
-    margin-top: 4%;
+    margin-top: 3%;
 }
 
 .keyboard-line {
     display: flex;
     justify-content: center;
-    margin-bottom: 2%;
+    margin-bottom: 2.5%;
 }
 
 .key,
 .large-key {
     box-shadow: 2px 2px 5px grey;
     border-radius: 10px;
-    padding: 10px;
-    width: 40px;
+    padding: 8px;
+    width: 70px;
     height: 40px;
-    font-size: 2rem;
+    font-size: 2.3rem;
     text-align: center;
     margin-left: 2%;
     margin-right: 2%;
     background-color: white;
+    font-weight: bold;
 }
 
 .large-key {
     width: 120px;
-}
-
-/* Footer */
-
-.footer {
-    text-align: center;
-    font-size: 0.8em;
-    margin-top: 3%;
-    color: #b4b4b4;
-}
-
-.footer-link {
-    color: inherit;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-.footer-link:hover {
-    text-decoration: underline;
 }
 
 /* SMALLER SCREENS */

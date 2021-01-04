@@ -1,7 +1,6 @@
 // Define keys
 var allKeys = ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'eAcc', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'oAcc',
-'aAcc', 'z', 'x', 'c', 'v', 'b', 'n', 'm', 'iAcc', 'uAcc', 'dot', 'comma', 'apostrophe', 'colon', 'questionMark',
-'exclamationPoint', 'openParenthesis', 'closeParenthesis', 'zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven',
+'aAcc', 'z', 'x', 'c', 'v', 'b', 'n', 'm', 'iAcc', 'uAcc', 'zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven',
 'eight', 'nine', 'whitespace', 'backspace'];
 
 // Defines possible iteration speed. Value refers to n times 1 second
