@@ -1,7 +1,7 @@
 // Define keys
-var allKeys = ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'eAcc', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'oAcc',
-'aAcc', 'z', 'x', 'c', 'v', 'b', 'n', 'm', 'iAcc', 'uAcc', 'zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven',
-'eight', 'nine', 'whitespace', 'backspace'];
+var allKeys = [['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o'], ['p', 'eAcc', 'a', 's', 'd', 'f', 'g', 'h', 'j'], ['k', 'l', 'oAcc',
+'aAcc', 'z', 'x', 'c', 'v', 'b'], ['n', 'm', 'iAcc', 'uAcc', 'zero', 'one', 'two', 'three', 'four'], ['five', 'six', 'seven',
+'eight', 'nine', 'whitespace', 'backspace']];
 
 // Defines possible iteration speed. Value refers to n times 1 second
 const iterationSpeed = [2, 1.5, 1, 0.7];
