@@ -120,7 +120,7 @@ body {
 .keyboard-line {
     display: flex;
     justify-content: center;
-    margin-bottom: 2.5%;
+    margin-bottom: 2%;
 }
 
 .key,
@@ -140,6 +140,15 @@ body {
 
 .large-key {
     width: 120px;
+}
+
+/* Footer */
+
+.footer {
+    text-align: center;
+    font-size: 0.8em;
+    margin-top: 3%;
+    color: #b4b4b4;
 }
 
 /* SMALLER SCREENS */
