@@ -1,6 +1,6 @@
 # Accessible Keyboard
 
-Accessible keyboard is a keyboard that makes it possible for physically impaired people, such as people affected by [ALS](https://en.wikipedia.org/wiki/ALS) or [PLS](https://en.wikipedia.org/wiki/ALS) to type effortlessly.
+Accessible keyboard is a keyboard that makes it possible for physically impaired people, such as people affected by [ALS](https://en.wikipedia.org/wiki/ALS) or [PLS](https://en.wikipedia.org/wiki/ALS), to type effortlessly.
 
 ## Getting Started
 
@@ -35,4 +35,8 @@ Some physically impaired people, such as those affected by [ALS](https://en.wiki
 
 ## Authors
 
-* **Riccardo Lucato**. <reach out on Twitter @rlucatoor>
+* **Riccardo Lucato**
+
+## Contact
+
+Reach out to me on Twitter at [@rlucatoor](https://twitter.com/rlucatoor)
